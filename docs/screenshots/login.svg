@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#f3f4f6"/>
+  <rect x="220" y="60" width="360" height="360" rx="12" fill="#fff" stroke="#e5e7eb"/>
+  <text x="400" y="120" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" font-weight="700" fill="#1e3a5f">PVMS Portal</text>
+  <text x="400" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#6b7280">Public Violation Management System</text>
+  <rect x="260" y="180" width="280" height="36" rx="6" fill="#f9fafb" stroke="#d1d5db"/>
+  <rect x="260" y="230" width="280" height="36" rx="6" fill="#f9fafb" stroke="#d1d5db"/>
+  <rect x="260" y="290" width="280" height="40" rx="6" fill="#1e40af"/>
+  <text x="400" y="316" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#fff">Login</text>
+  <text x="400" y="450" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#9ca3af">Login screen</text>
+</svg>

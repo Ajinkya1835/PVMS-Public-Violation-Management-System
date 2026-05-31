@@ -1,0 +1,19 @@
+# Deploy backend to Render: https://render.com
+# Dashboard → New → Blueprint → connect this repo
+services:
+  - type: web
+    name: pvms-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGO_URI
+        sync: false
+      - key: FRONTEND_URL
+        sync: false

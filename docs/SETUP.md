@@ -100,6 +100,12 @@ Verify:
 
 ---
 
+## Deploy to production
+
+See **[DEPLOY.md](DEPLOY.md)** for Vercel (frontend) + Render (backend) + Atlas.
+
+---
+
 ## Production build (frontend)
 
 ```bash
