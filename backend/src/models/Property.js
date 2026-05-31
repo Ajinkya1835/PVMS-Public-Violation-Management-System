@@ -85,7 +85,6 @@ const propertySchema = new mongoose.Schema(
 // Indexes for faster queries and geospatial operations
 propertySchema.index({ owner: 1, status: 1 });
 propertySchema.index({ status: 1 });
-propertySchema.index({ permitNumber: 1 });
 propertySchema.index({ locationGeo: "2dsphere" }); // Geospatial index
 propertySchema.index({ wardNumber: 1, zone: 1 });
 propertySchema.index({ createdAt: -1 });

@@ -1,27 +1,39 @@
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import apiRequest from "../api/api.js";
 import { calculateDistance, formatDistance } from "../utils/distanceCalculator.js";
 import { loadGoogleMaps } from "../utils/googleMapsLoader.js";
 import "./AllPropertiesMap.css";
 
 function AllPropertiesMap() {
+  const hasGeolocation = typeof navigator !== "undefined" && "geolocation" in navigator;
   const [userLocation, setUserLocation] = useState(null);
   const [properties, setProperties] = useState([]);
   const [selectedProperty, setSelectedProperty] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [locationStatus, setLocationStatus] = useState("Detecting location...");
+  const [loading, setLoading] = useState(hasGeolocation);
+  const [error, setError] = useState(
+    hasGeolocation ? "" : "Geolocation is not supported by your browser"
+  );
+  const [locationStatus, setLocationStatus] = useState(
+    hasGeolocation ? "Detecting location..." : "Location unavailable"
+  );
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef({});
 
+  // Update marker colors when selection changes
+  const updateMarkers = useCallback((selectedId) => {
+    Object.entries(markersRef.current).forEach(([propId, marker]) => {
+      marker.setIcon(
+        selectedId === propId
+          ? "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+          : "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+      );
+    });
+  }, []);
+
   // Detect user location
   useEffect(() => {
-    if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser");
-      setLoading(false);
-      return;
-    }
+    if (!hasGeolocation) return;
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -36,7 +48,7 @@ function AllPropertiesMap() {
         setLoading(false);
       }
     );
-  }, []);
+  }, [hasGeolocation]);
 
   // Fetch all properties
   useEffect(() => {
@@ -96,7 +108,7 @@ function AllPropertiesMap() {
         mapInstanceRef.current = map;
 
         // Add user location marker (red)
-        const userMarker = new window.google.maps.Marker({
+        new window.google.maps.Marker({
           position: { lat: userLocation.latitude, lng: userLocation.longitude },
           map,
           icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
@@ -131,18 +143,7 @@ function AllPropertiesMap() {
     };
 
     initMap();
-  }, [userLocation, properties]);
-
-  // Update marker colors when selection changes
-  const updateMarkers = (selectedId) => {
-    Object.entries(markersRef.current).forEach(([propId, marker]) => {
-      marker.setIcon(
-        selectedId === propId
-          ? "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-          : "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-      );
-    });
-  };
+  }, [selectedProperty?._id, updateMarkers, userLocation, properties]);
 
   // Handle property list click
   const handlePropertyClick = (property) => {
@@ -275,7 +276,7 @@ function AllPropertiesMap() {
                 </tr>
               </thead>
               <tbody>
-                {properties.map((prop, idx) => (
+                {properties.map((prop) => (
                   <tr
                     key={prop._id}
                     className={selectedProperty?._id === prop._id ? "selected-row" : ""}

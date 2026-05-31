@@ -69,8 +69,6 @@ const paymentSchema = new mongoose.Schema(
 paymentSchema.index({ violation: 1 });
 paymentSchema.index({ payer: 1, createdAt: -1 });
 paymentSchema.index({ status: 1 });
-paymentSchema.index({ transactionId: 1 });
-paymentSchema.index({ receiptNumber: 1 });
 paymentSchema.index({ paymentDate: -1 });
 
 export default mongoose.model("Payment", paymentSchema);

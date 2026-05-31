@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import apiRequest from "./api/api.js";
 import Login from "./pages/Login";
 import CitizenRegister from "./pages/CitizenRegister";
@@ -8,6 +8,7 @@ import Citizen from "./pages/Citizen";
 import Owner from "./pages/Owner";
 import Officer from "./pages/Officer";
 import AllPropertiesMap from "./pages/AllPropertiesMap.jsx";
+import TestInfo from "./pages/TestInfo.jsx";
 
 function ProtectedRoute({ children, user, requiredRole }) {
   if (!user) {
@@ -25,6 +26,12 @@ function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const handleLogout = useCallback(() => {
+    setUser(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  }, []);
+
   useEffect(() => {
     const initializeAuth = async () => {
       const storedUser = localStorage.getItem("user");
@@ -38,7 +45,7 @@ function App() {
             // If token is invalid, logout
             handleLogout();
           });
-        } catch (error) {
+        } catch {
           localStorage.removeItem("user");
           localStorage.removeItem("token");
         }
@@ -47,16 +54,10 @@ function App() {
     };
 
     initializeAuth();
-  }, []);
+  }, [handleLogout]);
 
   const handleLogin = (userData) => {
     setUser(userData);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
   };
 
   if (loading) {
@@ -73,6 +74,12 @@ function App() {
         />
         <Route path="/register/citizen" element={<CitizenRegister />} />
         <Route path="/register/owner" element={<OwnerRegister />} />
+        {import.meta.env.DEV && (
+          <Route
+            path="/test-info"
+            element={<TestInfo onLogin={handleLogin} />}
+          />
+        )}
 
         {/* Protected Routes */}
         <Route

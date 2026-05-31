@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import apiRequest from "../api/api.js";
 import { loadGoogleMaps } from "../utils/googleMapsLoader";
-import { calculateDistance, formatDistance } from "../utils/distanceCalculator.js";
+import { calculateDistance } from "../utils/distanceCalculator.js";
 import "./CitizenNearbyProperties.css";
 
 function CitizenNearbyProperties() {
@@ -24,6 +24,8 @@ function CitizenNearbyProperties() {
     if (userLocation) {
       fetchAllProperties();
     }
+    // Fetch when the detected user location changes; the helper reads that state.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userLocation]);
 
   const detectLocation = () => {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import apiRequest from "../api/api.js";
 import "./OwnerProfile.css";
 
-function OwnerProfile({ onNavigate }) {
+function OwnerProfile() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

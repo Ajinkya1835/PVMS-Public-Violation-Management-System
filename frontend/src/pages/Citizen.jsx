@@ -34,7 +34,6 @@ function Citizen({ onLogout }) {
 
   /* ---------- UI ---------- */
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const [currentStep, setCurrentStep] = useState(1);
   const [confirmationChecked, setConfirmationChecked] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -88,25 +87,6 @@ function Citizen({ onLogout }) {
     );
   }, []);
 
-  /* ---------- FETCH NEARBY PROPERTIES ---------- */
-  const fetchNearbyProperties = async () => {
-    if (!latitude || !longitude) return;
-    try {
-      const data = await apiRequest(
-        `/api/properties/nearby?lat=${latitude}&lng=${longitude}&radius=3000`
-      );
-      // Not used anymore - keeping for potential future use
-    } catch (err) {
-      console.error("Error fetching nearby properties:", err);
-    }
-  };
-
-  useEffect(() => {
-    if (latitude && longitude) {
-      fetchNearbyProperties();
-    }
-  }, [latitude, longitude]);
-
   /* ---------- FETCH MY VIOLATIONS ---------- */
   const fetchViolations = async () => {
     setLoading(true);
@@ -144,7 +124,6 @@ function Citizen({ onLogout }) {
     e.preventDefault();
     console.log("🚀 Form submitted!");
     setError("");
-    setMessage("");
     setLoading(true);
 
     console.log("Validation checks:");

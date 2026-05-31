@@ -5,4 +5,5 @@ node_modules/
 logs/
 .DS_Store
 .vscode/
-uploads/
+uploads/*
+!uploads/.gitkeep

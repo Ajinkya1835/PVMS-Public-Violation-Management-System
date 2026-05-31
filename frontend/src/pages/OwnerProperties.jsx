@@ -4,7 +4,7 @@ import apiRequest from "../api/api.js";
 import MapPicker from "../components/MapPicker.jsx";
 import "./OwnerProperties.css";
 
-function OwnerProperties({ onNavigate }) {
+function OwnerProperties() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -217,23 +217,15 @@ function OwnerProperties({ onNavigate }) {
             </div>
 
             <div className="form-group">
-              <label>Location on Map * {!editingProperty && "(Click or drag marker)"}</label>
-              <div ref={mapRef} className="map-container" style={{ width: '100%', height: '400px', borderRadius: '4px', border: '1px solid #cbd5e1' }}></div>
+              <label>Property Location * (Click or drag marker)</label>
+              <MapPicker
+                latitude={formData.latitude}
+                longitude={formData.longitude}
+                onLocationChange={(lat, lng) => {
+                  setFormData({ ...formData, latitude: lat, longitude: lng });
+                }}
+              />
             </div>
-
-            {/* Map Picker Component */}
-            {!editingProperty && (
-              <div className="form-group">
-                <label>Property Location *</label>
-                <MapPicker
-                  latitude={formData.latitude}
-                  longitude={formData.longitude}
-                  onLocationChange={(lat, lng) => {
-                    setFormData({ ...formData, latitude: lat, longitude: lng });
-                  }}
-                />
-              </div>
-            )}
 
             <div className="form-row">
               <div className="form-group">

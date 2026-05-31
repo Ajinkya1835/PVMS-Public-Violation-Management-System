@@ -1,5 +1,5 @@
 // frontend/src/components/MapSearchPanel.jsx
-import { useState, useEffect, useRef } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import { loadGoogleMaps } from '../utils/googleMapsLoader';
 import apiRequest from '../api/api';
 import './MapSearchPanel.css';
@@ -19,21 +19,11 @@ function MapSearchPanel({ userRole }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [searchType, setSearchType] = useState('violations'); // 'violations' or 'properties'
 
-  useEffect(() => {
-    loadGoogleMaps((error) => {
-      if (error) {
-        console.error('Google Maps loading error:', error);
-        return;
-      }
-      initializeMap();
-    });
-  }, []);
-
-  const initializeMap = () => {
+  const initializeMap = useCallback(() => {
     if (!window.google || !mapRef.current) return;
 
     mapInstanceRef.current = new window.google.maps.Map(mapRef.current, {
-      center: center,
+      center: { lat: 19.0760, lng: 72.8777 },
       zoom: 12,
       mapTypeControl: true,
       streetViewControl: false,
@@ -45,7 +35,17 @@ function MapSearchPanel({ userRole }) {
       const newLng = event.latLng.lng();
       setCenter({ lat: newLat, lng: newLng });
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    loadGoogleMaps((error) => {
+      if (error) {
+        console.error('Google Maps loading error:', error);
+        return;
+      }
+      initializeMap();
+    });
+  }, [initializeMap]);
 
   const clearMarkers = () => {
     markersRef.current.forEach(marker => marker.setMap(null));

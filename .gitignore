@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Environment & secrets
+.env
+.env.local
+.env.production
+*.local
+
+# Build output
+frontend/dist/
+dist-ssr/
+
+# Logs
+logs/
+*.log
+backend-dev.log
+backend-dev.err.log
+backend/backend-dev.log
+backend/backend-dev.err.log
+
+# Uploads & runtime data
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# OS & editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

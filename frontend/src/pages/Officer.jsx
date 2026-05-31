@@ -44,6 +44,8 @@ export default function Officer({ onLogout }) {
       return;
     }
     renderViolationMap(objectedViolations);
+    // Re-render the external Google Map only when the tab/list inputs change.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTab, objectedViolations]);
 
   const fetchDashboardData = async () => {
@@ -183,7 +185,7 @@ export default function Officer({ onLogout }) {
 
   const handleApproveCitizen = async (userId) => {
     try {
-      const response = await apiRequest(`/api/officer/approve-citizen/${userId}`, {
+      await apiRequest(`/api/officer/approve-citizen/${userId}`, {
         method: "POST",
       });
 
@@ -194,14 +196,14 @@ export default function Officer({ onLogout }) {
         approved: { ...prev.approved, citizens: prev.approved.citizens + 1 },
       }));
       setSelectedForAction(null);
-    } catch (err) {
+    } catch {
       setError("Failed to approve citizen");
     }
   };
 
   const handleApproveOwner = async (userId) => {
     try {
-      const response = await apiRequest(`/api/officer/approve-owner/${userId}`, {
+      await apiRequest(`/api/officer/approve-owner/${userId}`, {
         method: "POST",
       });
 
@@ -212,7 +214,7 @@ export default function Officer({ onLogout }) {
         approved: { ...prev.approved, owners: prev.approved.owners + 1 },
       }));
       setSelectedForAction(null);
-    } catch (err) {
+    } catch {
       setError("Failed to approve owner");
     }
   };
@@ -224,7 +226,7 @@ export default function Officer({ onLogout }) {
     }
 
     try {
-      const response = await apiRequest(`/api/officer/reject-user/${userId}`, {
+      await apiRequest(`/api/officer/reject-user/${userId}`, {
         method: "POST",
         body: JSON.stringify({ reason: rejectionReason }),
       });
@@ -233,14 +235,14 @@ export default function Officer({ onLogout }) {
       setPendingOwners((prev) => prev.filter((o) => o._id !== userId));
       setSelectedForAction(null);
       setRejectionReason("");
-    } catch (err) {
+    } catch {
       setError("Failed to reject user");
     }
   };
 
   const handleApproveProperty = async (propertyId) => {
     try {
-      const response = await apiRequest(`/api/officer/approve-property/${propertyId}`, {
+      await apiRequest(`/api/officer/approve-property/${propertyId}`, {
         method: "POST",
       });
 
@@ -250,7 +252,7 @@ export default function Officer({ onLogout }) {
         pending: { ...prev.pending, properties: prev.pending.properties - 1 },
       }));
       setSelectedForAction(null);
-    } catch (err) {
+    } catch {
       setError("Failed to approve property");
     }
   };
@@ -262,7 +264,7 @@ export default function Officer({ onLogout }) {
     }
 
     try {
-      const response = await apiRequest(`/api/officer/reject-property/${propertyId}`, {
+      await apiRequest(`/api/officer/reject-property/${propertyId}`, {
         method: "POST",
         body: JSON.stringify({ reason: rejectionReason }),
       });
@@ -274,7 +276,7 @@ export default function Officer({ onLogout }) {
       }));
       setSelectedForAction(null);
       setRejectionReason("");
-    } catch (err) {
+    } catch {
       setError("Failed to reject property");
     }
   };

@@ -4,7 +4,7 @@ import apiRequest from "../api/api.js";
 import MapView from "../components/MapView.jsx";
 import "./OwnerViolations.css";
 
-function OwnerViolations({ onNavigate }) {
+function OwnerViolations() {
   const [violations, setViolations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -51,21 +51,6 @@ function OwnerViolations({ onNavigate }) {
       setTimeout(() => setMessage(""), 3000);
     } catch (err) {
       setError(err.message || "Failed to process payment");
-    }
-  };
-
-  const handleAccept = async (id) => {
-    if (!window.confirm("Accept this violation decision?")) return;
-
-    try {
-      await apiRequest(`/api/owner/violations/${id}/accept`, {
-        method: "POST",
-      });
-      setMessage("Violation accepted successfully");
-      fetchViolations();
-      setTimeout(() => setMessage(""), 3000);
-    } catch (err) {
-      setError(err.message || "Failed to accept violation");
     }
   };
 

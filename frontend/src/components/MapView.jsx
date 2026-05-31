@@ -1,24 +1,12 @@
 // frontend/src/components/MapView.jsx
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { loadGoogleMaps } from '../utils/googleMapsLoader';
 import './MapView.css';
 
 function MapView({ latitude, longitude, title = 'Location' }) {
   const mapRef = useRef(null);
 
-  useEffect(() => {
-    if (!latitude || !longitude) return;
-
-    loadGoogleMaps((error) => {
-      if (error) {
-        console.error('Google Maps loading error:', error);
-        return;
-      }
-      initializeMap();
-    });
-  }, [latitude, longitude]);
-
-  const initializeMap = () => {
+  const initializeMap = useCallback(() => {
     if (!window.google || !mapRef.current) return;
 
     const lat = parseFloat(latitude);
@@ -45,7 +33,19 @@ function MapView({ latitude, longitude, title = 'Location' }) {
       map: map,
       title: title,
     });
-  };
+  }, [latitude, longitude, title]);
+
+  useEffect(() => {
+    if (!latitude || !longitude) return;
+
+    loadGoogleMaps((error) => {
+      if (error) {
+        console.error('Google Maps loading error:', error);
+        return;
+      }
+      initializeMap();
+    });
+  }, [initializeMap, latitude, longitude]);
 
   if (!latitude || !longitude) {
     return <div className="map-view-error">Location not available</div>;

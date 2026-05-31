@@ -1,5 +1,7 @@
 # PVMS Case Study
 
+> **Note:** For up-to-date documentation, see [README.md](README.md) and [docs/](docs/).
+
 _Date: 2026-01-10_
 
 ## Overview

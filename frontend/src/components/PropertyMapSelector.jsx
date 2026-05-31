@@ -1,5 +1,5 @@
 // frontend/src/components/PropertyMapSelector.jsx
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { loadGoogleMaps } from '../utils/googleMapsLoader';
 import './PropertyMapSelector.css';
 
@@ -8,19 +8,7 @@ function PropertyMapSelector({ latitude, longitude, properties, onPropertySelect
   const mapInstanceRef = useRef(null);
   const markersRef = useRef([]);
 
-  useEffect(() => {
-    if (latitude && longitude) {
-      loadGoogleMaps((error) => {
-        if (error) {
-          console.error('Google Maps loading error:', error);
-          return;
-        }
-        initializeMap();
-      });
-    }
-  }, [latitude, longitude, properties]);
-
-  const initializeMap = () => {
+  const initializeMap = useCallback(() => {
     if (!window.google || !mapRef.current) return;
 
     const lat = parseFloat(latitude);
@@ -69,15 +57,25 @@ function PropertyMapSelector({ latitude, longitude, properties, onPropertySelect
 
           marker.addListener('click', () => {
             onPropertySelect(property);
-            // Update marker colors
-            initializeMap();
           });
 
           markersRef.current.push(marker);
         }
       });
     }
-  };
+  }, [latitude, longitude, onPropertySelect, properties, selectedPropertyId]);
+
+  useEffect(() => {
+    if (latitude && longitude) {
+      loadGoogleMaps((error) => {
+        if (error) {
+          console.error('Google Maps loading error:', error);
+          return;
+        }
+        initializeMap();
+      });
+    }
+  }, [initializeMap, latitude, longitude]);
 
   if (!latitude || !longitude) {
     return (

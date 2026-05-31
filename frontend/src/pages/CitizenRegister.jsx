@@ -48,7 +48,7 @@ export default function CitizenRegister() {
     setLoading(true);
 
     try {
-      const data = await apiRequest("/api/auth/register", {
+      await apiRequest("/api/auth/register", {
         method: "POST",
         body: JSON.stringify({
           name: formData.name,

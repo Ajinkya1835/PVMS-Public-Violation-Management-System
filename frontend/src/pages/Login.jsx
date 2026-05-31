@@ -129,6 +129,19 @@ export default function Login({ onLogin }) {
             <div className="approval-notice" style={{ marginTop: "12px" }}>
               ℹ️ New registrations require municipal officer approval before account activation.
             </div>
+
+            {import.meta.env.DEV && (
+              <div style={{ marginTop: 16, paddingTop: 12, borderTop: "1px solid #e5e7eb" }}>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  style={{ width: "100%" }}
+                  onClick={() => navigate("/test-info")}
+                >
+                  🧪 Open test accounts &amp; demo data
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

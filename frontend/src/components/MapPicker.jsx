@@ -1,5 +1,5 @@
 // frontend/src/components/MapPicker.jsx
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { loadGoogleMaps } from '../utils/googleMapsLoader';
 import './MapPicker.css';
 
@@ -8,13 +8,53 @@ function MapPicker({ latitude, longitude, onLocationChange, properties = [] }) {
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
   const propertyMarkersRef = useRef([]);
+  const [mapError, setMapError] = useState('');
+
+  const initializeMap = useCallback(() => {
+    if (!window.google || !mapRef.current) return;
+
+    const lat = parseFloat(latitude) || 19.0760; // Mumbai default
+    const lng = parseFloat(longitude) || 72.8777;
+
+    mapInstanceRef.current = new window.google.maps.Map(mapRef.current, {
+      center: { lat, lng },
+      zoom: 14,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
+    });
+
+    markerRef.current = new window.google.maps.Marker({
+      position: { lat, lng },
+      map: mapInstanceRef.current,
+      draggable: true,
+      title: 'Location',
+    });
+
+    // Update on marker drag
+    markerRef.current.addListener('dragend', (event) => {
+      const newLat = event.latLng.lat();
+      const newLng = event.latLng.lng();
+      onLocationChange(newLat.toFixed(6), newLng.toFixed(6));
+    });
+
+    // Update on map click
+    mapInstanceRef.current.addListener('click', (event) => {
+      const newLat = event.latLng.lat();
+      const newLng = event.latLng.lng();
+      markerRef.current.setPosition({ lat: newLat, lng: newLng });
+      onLocationChange(newLat.toFixed(6), newLng.toFixed(6));
+    });
+  }, [latitude, longitude, onLocationChange]);
 
   useEffect(() => {
     loadGoogleMaps((error) => {
       if (error) {
         console.error('Google Maps loading error:', error);
+        setMapError('Unable to load Google Maps. Please allow maps.googleapis.com and try again.');
         return;
       }
+      setMapError('');
       initializeMap();
     });
 
@@ -26,7 +66,7 @@ function MapPicker({ latitude, longitude, onLocationChange, properties = [] }) {
         marker.setMap(null);
       });
     };
-  }, []);
+  }, [initializeMap]);
 
   useEffect(() => {
     if (mapInstanceRef.current && latitude && longitude) {
@@ -83,48 +123,12 @@ function MapPicker({ latitude, longitude, onLocationChange, properties = [] }) {
     }
   }, [properties]);
 
-  const initializeMap = () => {
-    if (!window.google || !mapRef.current) return;
-
-    const lat = parseFloat(latitude) || 19.0760; // Mumbai default
-    const lng = parseFloat(longitude) || 72.8777;
-
-    mapInstanceRef.current = new window.google.maps.Map(mapRef.current, {
-      center: { lat, lng },
-      zoom: 14,
-      mapTypeControl: false,
-      streetViewControl: false,
-      fullscreenControl: false,
-    });
-
-    markerRef.current = new window.google.maps.Marker({
-      position: { lat, lng },
-      map: mapInstanceRef.current,
-      draggable: true,
-      title: 'Location',
-    });
-
-    // Update on marker drag
-    markerRef.current.addListener('dragend', (event) => {
-      const newLat = event.latLng.lat();
-      const newLng = event.latLng.lng();
-      onLocationChange(newLat.toFixed(6), newLng.toFixed(6));
-    });
-
-    // Update on map click
-    mapInstanceRef.current.addListener('click', (event) => {
-      const newLat = event.latLng.lat();
-      const newLng = event.latLng.lng();
-      markerRef.current.setPosition({ lat: newLat, lng: newLng });
-      onLocationChange(newLat.toFixed(6), newLng.toFixed(6));
-    });
-  };
-
   return (
     <div className="map-picker-container">
       <div className="map-picker-header">
         <span className="map-picker-hint">Click map or drag marker to set location. Blue markers show registered properties.</span>
       </div>
+      {mapError ? <div className="alert-error"><p>{mapError}</p></div> : null}
       <div ref={mapRef} className="map-picker-canvas"></div>
     </div>
   );

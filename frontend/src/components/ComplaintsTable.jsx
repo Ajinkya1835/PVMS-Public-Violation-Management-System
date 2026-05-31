@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import "./ComplaintsTable.css";
 
 export default function ComplaintsTable({ violations, loading }) {
@@ -79,7 +79,7 @@ export default function ComplaintsTable({ violations, loading }) {
             const statusConfig = getStatusConfig(v.status);
 
             return (
-              <>
+              <Fragment key={v._id}>
                 <tr key={v._id} className={isExpanded ? "expanded" : ""}>
                   <td>
                     <div className="complaint-id-cell">
@@ -182,7 +182,7 @@ export default function ComplaintsTable({ violations, loading }) {
                     </td>
                   </tr>
                 )}
-              </>
+              </Fragment>
             );
           })}
         </tbody>
