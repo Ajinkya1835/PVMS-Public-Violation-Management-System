@@ -57,7 +57,18 @@ Set `VITE_GOOGLE_MAPS_API_KEY` to a key with **Maps JavaScript API** enabled.
 
 ## Database setup
 
-### Demo data (recommended for first run)
+See **[DATABASE.md](DATABASE.md)** for the full guide.
+
+### Included database files (recommended)
+
+```bash
+npm run db:up       # Docker MongoDB on localhost:27017
+npm run db:import   # Import database/data/*.json
+```
+
+Set `MONGO_URI=mongodb://localhost:27017/pvms` in `backend/.env`.
+
+### Alternative: seed script
 
 ```bash
 npm run seed:demo

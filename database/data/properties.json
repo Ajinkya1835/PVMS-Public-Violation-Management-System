@@ -1,0 +1,50 @@
+[
+  {
+    "ownerEmail": "owner@pvms.test",
+    "propertyName": "Demo Kirana Shop",
+    "propertyType": "Shop",
+    "address": "12 Station Road, Thane",
+    "wardNumber": "12",
+    "zone": "Central",
+    "permitNumber": "PVMS-DEMO-001",
+    "status": "ACTIVE",
+    "latitude": 19.197,
+    "longitude": 72.963
+  },
+  {
+    "ownerEmail": "owner@pvms.test",
+    "propertyName": "Demo Small Industry",
+    "propertyType": "Industry",
+    "address": "Plot 8 MIDC Road, Thane",
+    "wardNumber": "8",
+    "zone": "Industrial",
+    "permitNumber": "PVMS-DEMO-002",
+    "status": "ACTIVE",
+    "latitude": 19.199,
+    "longitude": 72.965
+  },
+  {
+    "ownerEmail": "owner2@pvms.test",
+    "propertyName": "Demo Residence",
+    "propertyType": "Residence",
+    "address": "Flat 302 Green Heights, Thane",
+    "wardNumber": "5",
+    "zone": "Residential",
+    "permitNumber": "PVMS-DEMO-003",
+    "status": "ACTIVE",
+    "latitude": 19.201,
+    "longitude": 72.967
+  },
+  {
+    "ownerEmail": "owner@pvms.test",
+    "propertyName": "Demo Pending Warehouse",
+    "propertyType": "Industry",
+    "address": "Warehouse 2, Thane",
+    "wardNumber": "9",
+    "zone": "Industrial",
+    "permitNumber": "PVMS-DEMO-PENDING",
+    "status": "PENDING_APPROVAL",
+    "latitude": 19.203,
+    "longitude": 72.969
+  }
+]

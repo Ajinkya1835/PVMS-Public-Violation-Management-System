@@ -1,0 +1,18 @@
+# Local MongoDB for PVMS — no Atlas account required
+# Usage: docker compose up -d
+# Then set in backend/.env: MONGO_URI=mongodb://localhost:27017/pvms
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: pvms-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - pvms_mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: pvms
+
+volumes:
+  pvms_mongo_data:

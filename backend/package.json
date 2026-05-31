@@ -8,6 +8,7 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "seed:demo": "node src/scripts/seedDemoData.js",
+    "db:import": "node src/scripts/importDatabase.js",
     "test:api": "node src/scripts/runApiTests.js"
   },
   "keywords": [],

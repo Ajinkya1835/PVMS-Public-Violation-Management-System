@@ -8,6 +8,9 @@
     "dev:frontend": "npm run dev --prefix frontend",
     "install:all": "npm install --prefix backend && npm install --prefix frontend",
     "seed:demo": "npm run seed:demo --prefix backend",
+    "db:import": "npm run db:import --prefix backend",
+    "db:up": "docker compose -f database/docker-compose.yml up -d",
+    "db:down": "docker compose -f database/docker-compose.yml down",
     "test:api": "npm run test:api --prefix backend",
     "build:frontend": "npm run build --prefix frontend"
   },

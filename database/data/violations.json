@@ -1,0 +1,92 @@
+[
+  {
+    "reporterEmail": "citizen@pvms.test",
+    "propertyPermit": "PVMS-DEMO-001",
+    "violationType": "WASTE-002",
+    "description": "[DEMO] Garbage dumped outside shop entrance",
+    "status": "AWAITING_OWNER",
+    "decision": {
+      "decision": "FINE",
+      "amount": 2500,
+      "ruleApplied": "WASTE-002",
+      "ruleSnapshot": {
+        "title": "Garbage dumping",
+        "act": "Municipal Act",
+        "section": "45",
+        "authority": "Municipal Corporation",
+        "severity": "MEDIUM"
+      },
+      "requiresHuman": false
+    },
+    "latitude": 19.1972,
+    "longitude": 72.9632
+  },
+  {
+    "reporterEmail": "citizen@pvms.test",
+    "propertyPermit": "PVMS-DEMO-002",
+    "violationType": "NOISE-001",
+    "description": "[DEMO] Loud machinery after 10 PM",
+    "status": "OBJECTED",
+    "objectionReason": "Equipment was under scheduled maintenance with municipal notice.",
+    "decision": {
+      "decision": "FINE",
+      "amount": 5000,
+      "ruleApplied": "NOISE-001",
+      "ruleSnapshot": {
+        "title": "Noise violation",
+        "act": "Municipal Act",
+        "section": "45",
+        "authority": "Municipal Corporation",
+        "severity": "MEDIUM"
+      },
+      "requiresHuman": false
+    },
+    "latitude": 19.1992,
+    "longitude": 72.9652
+  },
+  {
+    "reporterEmail": "citizen@pvms.test",
+    "violationType": "SIGN-001",
+    "description": "[DEMO] Unauthorized hoarding on public land",
+    "status": "REPORTED",
+    "decision": {
+      "decision": "FINE",
+      "amount": 1500,
+      "ruleApplied": "SIGN-001",
+      "requiresHuman": false
+    },
+    "latitude": 19.198,
+    "longitude": 72.964
+  },
+  {
+    "reporterEmail": "citizen@pvms.test",
+    "propertyPermit": "PVMS-DEMO-001",
+    "violationType": "WASTE-002",
+    "description": "[DEMO] Repeat waste violation (fine multiplier test)",
+    "status": "CLOSED",
+    "decision": {
+      "decision": "FINE",
+      "amount": 5000,
+      "ruleApplied": "WASTE-002",
+      "requiresHuman": false
+    },
+    "latitude": 19.1975,
+    "longitude": 72.9635,
+    "createPayment": true
+  },
+  {
+    "reporterEmail": "citizen@pvms.test",
+    "propertyPermit": "PVMS-DEMO-002",
+    "violationType": "WATER-001",
+    "description": "[DEMO] Auto-decided water misuse",
+    "status": "AUTO_DECIDED",
+    "decision": {
+      "decision": "FINE",
+      "amount": 3000,
+      "ruleApplied": "WATER-001",
+      "requiresHuman": false
+    },
+    "latitude": 19.1995,
+    "longitude": 72.9655
+  }
+]

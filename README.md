@@ -42,11 +42,18 @@ cp frontend/.env.example frontend/.env
 
 Edit `backend/.env` (MongoDB URI, JWT secret) and `frontend/.env` (Maps API key).
 
-### 3. Load demo data (optional)
+### 3. Database (pick one)
+
+**Easiest — included database files + local MongoDB:**
 
 ```bash
-npm run seed:demo
+npm run db:up          # requires Docker
+npm run db:import      # loads database/data/*.json
 ```
+
+**Or use MongoDB Atlas** — see [docs/DATABASE.md](docs/DATABASE.md).
+
+**Or seed via script:** `npm run seed:demo`
 
 ### 4. Run the application
 
@@ -80,6 +87,8 @@ Open **http://localhost:5173**
 | [User Manual](docs/USER-MANUAL.md) | Step-by-step guide for citizens, owners, and officers |
 | [Features](docs/FEATURES.md) | Feature list and workflows |
 | [Setup Guide](docs/SETUP.md) | Detailed installation and configuration |
+| [Database Setup](docs/DATABASE.md) | MongoDB, Docker, included JSON data files |
+| [Database Files](database/README.md) | Import `database/data/*.json` |
 | [Testing](docs/TESTING.md) | Demo accounts, seed data, API tests |
 | [Architecture](docs/ARCHITECTURE.md) | Technical overview and data model |
 
@@ -101,6 +110,8 @@ pvms/
 │   └── src/
 │       ├── pages/      # Citizen, Owner, Officer portals
 │       └── components/
+├── database/         # Demo JSON data + Docker MongoDB
+│   └── data/         # users, properties, violations, notifications
 └── docs/             # User & developer documentation
 ```
 
@@ -112,7 +123,9 @@ pvms/
 |---------|-------------|
 | `npm run dev:backend` | Start API with nodemon |
 | `npm run dev:frontend` | Start Vite dev server |
-| `npm run seed:demo` | Load test users and sample violations |
+| `npm run db:up` | Start local MongoDB (Docker) |
+| `npm run db:import` | Import demo data from `database/data/*.json` |
+| `npm run seed:demo` | Load test users and sample violations (same data) |
 | `npm run test:api` | Run API smoke tests (backend must be running) |
 | `npm run build:frontend` | Production build of the portal |
 

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Demo Officer",
+    "email": "officer@pvms.test",
+    "role": "OFFICER",
+    "approved": true,
+    "phone": "9000000001",
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  },
+  {
+    "name": "Demo Admin",
+    "email": "admin@pvms.test",
+    "role": "ADMIN",
+    "approved": true,
+    "phone": "9000000005",
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  },
+  {
+    "name": "Demo Citizen",
+    "email": "citizen@pvms.test",
+    "role": "CITIZEN",
+    "approved": true,
+    "phone": "9000000002",
+    "address": "Ward 12, Thane",
+    "approvedByEmail": "officer@pvms.test",
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  },
+  {
+    "name": "Demo Owner",
+    "email": "owner@pvms.test",
+    "role": "PERMIT_HOLDER",
+    "approved": true,
+    "phone": "9000000003",
+    "address": "Shop 4, Station Road, Thane",
+    "approvedByEmail": "officer@pvms.test",
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  },
+  {
+    "name": "Demo Owner Two",
+    "email": "owner2@pvms.test",
+    "role": "PERMIT_HOLDER",
+    "approved": true,
+    "phone": "9000000004",
+    "approvedByEmail": "officer@pvms.test",
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  },
+  {
+    "name": "Pending Citizen",
+    "email": "pending.citizen@pvms.test",
+    "role": "CITIZEN",
+    "approved": false,
+    "phone": "9000000010",
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  },
+  {
+    "name": "Pending Owner",
+    "email": "pending.owner@pvms.test",
+    "role": "PERMIT_HOLDER",
+    "approved": false,
+    "phone": "9000000011",
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  },
+  {
+    "name": "Test Citizen",
+    "email": "citizen@test.com",
+    "role": "CITIZEN",
+    "approved": true,
+    "approvedByEmail": "officer@pvms.test",
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  },
+  {
+    "name": "Test Owner",
+    "email": "owner@test.com",
+    "role": "PERMIT_HOLDER",
+    "approved": true,
+    "approvedByEmail": "officer@pvms.test",
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  },
+  {
+    "name": "Test Officer",
+    "email": "officer@test.com",
+    "role": "OFFICER",
+    "approved": true,
+    "passwordHash": "$2a$10$R4b3E.S/jrTVk9AIe/BMaeEMnabvOIsAiRjmjb8QX1Nk/5mgxR9bK"
+  }
+]

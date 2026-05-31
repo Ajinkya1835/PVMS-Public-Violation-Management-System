@@ -1,0 +1,27 @@
+[
+  {
+    "recipientEmail": "owner@pvms.test",
+    "type": "PAYMENT_DUE",
+    "title": "[DEMO] Fine payment due",
+    "message": "A fine of ₹2500 is due for violation at Demo Kirana Shop.",
+    "link": "/owner/violations",
+    "relatedEntityType": "VIOLATION",
+    "matchViolationDescription": "[DEMO] Garbage dumped outside shop entrance"
+  },
+  {
+    "recipientEmail": "owner@pvms.test",
+    "type": "VIOLATION_STATUS_CHANGED",
+    "title": "[DEMO] Objection under review",
+    "message": "Your objection for loud machinery violation is being reviewed.",
+    "link": "/owner/violations",
+    "relatedEntityType": "VIOLATION",
+    "matchViolationDescription": "[DEMO] Loud machinery after 10 PM"
+  },
+  {
+    "recipientEmail": "citizen@pvms.test",
+    "type": "VIOLATION_REPORTED",
+    "title": "[DEMO] Report received",
+    "message": "Your violation report has been logged successfully.",
+    "read": true
+  }
+]
