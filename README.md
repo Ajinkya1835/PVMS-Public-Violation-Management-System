@@ -45,21 +45,6 @@ Open **http://localhost:5173/test-info** for one-click demo logins across all ro
 
 ---
 
-## Screenshots
-
-<table>
-  <tr>
-    <td align="center"><b>Login</b><br/><img src="docs/screenshots/login.svg" width="380" alt="Login"/></td>
-    <td align="center"><b>Citizen</b><br/><img src="docs/screenshots/citizen.svg" width="380" alt="Citizen dashboard"/></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Owner</b><br/><img src="docs/screenshots/owner.svg" width="380" alt="Owner portal"/></td>
-    <td align="center"><b>Officer</b><br/><img src="docs/screenshots/officer.svg" width="380" alt="Officer portal"/></td>
-  </tr>
-</table>
-
----
-
 ## Roles
 
 | Role | What they do |
