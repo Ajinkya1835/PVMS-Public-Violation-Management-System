@@ -1,24 +1,47 @@
 # PVMS — Public Violation Management System
 
-[![CI](https://github.com/Ajinkya1835/omlette/actions/workflows/ci.yml/badge.svg)](https://github.com/Ajinkya1835/omlette/actions/workflows/ci.yml)
+[![CI](https://github.com/Ajinkya1835/PVMS-Public-Violation-Management-System/actions/workflows/ci.yml/badge.svg)](https://github.com/Ajinkya1835/PVMS-Public-Violation-Management-System/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Node](https://img.shields.io/badge/node-%3E%3D18-green)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/database-MongoDB-green)](https://www.mongodb.com/)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 
-A full-stack **municipal portal** where citizens report property violations, permit holders respond or pay fines, and officers approve accounts and resolve objections — with maps, automated fines, and payments.
+A full-stack **municipal portal** where citizens report property violations, permit holders respond or pay fines, and officers approve accounts and resolve objections — with maps, automated fine calculation, and payments.
 
-**Repository:** [github.com/Ajinkya1835/omlette](https://github.com/Ajinkya1835/omlette)
+**Multi-role · Real-world domain · Maps & geodata · Batteries included** — demo data, Docker MongoDB, and CI all ship in the box.
 
 ---
 
-## Live demo
+## Contents
 
-| | URL |
-|---|-----|
-| **Portal** | _Deploy with [docs/DEPLOY.md](docs/DEPLOY.md) — add your Vercel link here_ |
-| **API** | [pvms.onrender.com](https://pvms.onrender.com/health) (if deployed) |
+- [Try it in 2 minutes](#try-it-in-2-minutes)
+- [Screenshots](#screenshots)
+- [Roles](#roles)
+- [Quick start](#quick-start)
+- [Documentation](#documentation)
+- [Tech stack](#tech-stack)
+- [Project structure](#project-structure)
+- [Scripts](#scripts)
+- [Deploy & CI](#deploy--ci)
+- [Contributing](#contributing)
+- [Author](#author)
 
-**Try locally in 2 minutes:** `npm run db:up` → `npm run db:import` → `npm run dev:frontend` → [localhost:5173/test-info](http://localhost:5173/test-info)
+---
+
+## Try it in 2 minutes
+
+```bash
+git clone https://github.com/Ajinkya1835/PVMS-Public-Violation-Management-System.git
+cd PVMS-Public-Violation-Management-System
+npm run install:all
+npm run db:up && npm run db:import
+npm run dev:backend    # terminal 1
+npm run dev:frontend   # terminal 2
+```
+
+Open **http://localhost:5173/test-info** for one-click demo logins across all roles.
+
+> A hosted live demo isn't up yet — see [docs/DEPLOY.md](docs/DEPLOY.md) to deploy your own in a few minutes (Vercel + Render + Atlas, all free tier).
 
 ---
 
@@ -35,17 +58,6 @@ A full-stack **municipal portal** where citizens report property violations, per
   </tr>
 </table>
 
-> Replace SVG previews with real PNGs — see [docs/screenshots/README.md](docs/screenshots/README.md).
-
----
-
-## Why this project?
-
-- **Multi-role workflows** — not a single-user CRUD app  
-- **Real-world domain** — violations, permits, fines, objections  
-- **Maps & geodata** — GeoJSON, clustering, radius search  
-- **Batteries included** — JSON database files, Docker MongoDB, demo accounts, CI  
-
 ---
 
 ## Roles
@@ -55,7 +67,7 @@ A full-stack **municipal portal** where citizens report property violations, per
 | **Citizen** | Report violations with location and photos |
 | **Permit holder (owner)** | Manage properties, accept fines, or object |
 | **Officer** | Approve registrations, review objections, confirm/waive fines |
-| **Admin** | System-level API access (optional) |
+| **Admin** | System-level API access |
 
 ---
 
@@ -70,22 +82,21 @@ A full-stack **municipal portal** where citizens report property violations, per
 ### Install
 
 ```bash
-git clone https://github.com/Ajinkya1835/omlette.git
-cd omlette
+git clone https://github.com/Ajinkya1835/PVMS-Public-Violation-Management-System.git
+cd PVMS-Public-Violation-Management-System
 npm run install:all
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
 ```
 
-### Database (included JSON files)
+### Database (included JSON demo data)
 
 ```bash
 npm run db:up          # Docker MongoDB → localhost:27017
 npm run db:import      # loads database/data/*.json
 ```
 
-Set `MONGO_URI=mongodb://localhost:27017/pvms` in `backend/.env`.  
-Atlas or other hosts: [docs/DATABASE.md](docs/DATABASE.md).
+Set `MONGO_URI=mongodb://localhost:27017/pvms` in `backend/.env`. Using Atlas or another host instead? See [docs/DATABASE.md](docs/DATABASE.md).
 
 ### Run
 
@@ -100,7 +111,7 @@ npm run dev:frontend   # http://localhost:5173
 | Test logins (dev) | http://localhost:5173/test-info |
 | API health | http://localhost:5000/health |
 
-**Demo password:** `password123` — see [docs/TESTING.md](docs/TESTING.md).
+**Demo password:** `password123` for every seeded account — full list in [docs/TESTING.md](docs/TESTING.md).
 
 ---
 
@@ -108,24 +119,42 @@ npm run dev:frontend   # http://localhost:5173
 
 | Document | Description |
 |----------|-------------|
-| [User Manual](docs/USER-MANUAL.md) | Citizens, owners, officers |
-| [Features](docs/FEATURES.md) | Feature list and workflows |
-| [Setup](docs/SETUP.md) | Installation |
-| [Database](docs/DATABASE.md) | MongoDB + bundled JSON data |
-| [Deploy](docs/DEPLOY.md) | **Vercel + Render live demo** |
-| [Testing](docs/TESTING.md) | Demo accounts & API tests |
-| [Architecture](docs/ARCHITECTURE.md) | Tech overview |
+| [User Manual](docs/USER-MANUAL.md) | Walkthroughs for citizens, owners, officers |
+| [Features](docs/FEATURES.md) | Full feature list and workflows |
+| [Setup](docs/SETUP.md) | Installation, environment variables |
+| [Database](docs/DATABASE.md) | MongoDB setup + bundled demo JSON |
+| [Deploy](docs/DEPLOY.md) | Vercel + Render + Atlas, step by step |
+| [Testing](docs/TESTING.md) | Demo accounts & API smoke tests |
+| [Architecture](docs/ARCHITECTURE.md) | Data models, API map, status machine |
 
 ---
 
 ## Tech stack
 
-![React](https://img.shields.io/badge/React-19-61dafb?logo=react)
-![Vite](https://img.shields.io/badge/Vite-7-646cff?logo=vite)
-![Express](https://img.shields.io/badge/Express-5-000?logo=express)
-![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb)
+React 19 · Vite 7 · React Router 7 · Express 5 · MongoDB (Mongoose) · JWT · Google Maps JavaScript API · Multer
 
-React 19 · Vite · Express 5 · MongoDB · JWT · Google Maps · Multer
+```
+┌─────────────┐     HTTPS/JSON      ┌─────────────┐     Mongoose     ┌──────────┐
+│  React SPA  │ ◄─────────────────► │ Express API │ ◄──────────────► │ MongoDB  │
+│  (Vite)     │      JWT auth       │  (Node.js)  │                  │  Atlas   │
+└─────────────┘                     └─────────────┘                  └──────────┘
+       │                                    │
+       └── Google Maps JS API               └── Multer → uploads/
+```
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for data models, the violation status machine, and the fine calculation formula.
+
+---
+
+## Project structure
+
+```
+├── backend/           # Express API
+├── frontend/          # React portal
+├── database/data/     # Demo JSON (users, properties, violations)
+├── docs/              # Guides + screenshots
+└── .github/workflows/ # CI on every push
+```
 
 ---
 
@@ -143,31 +172,27 @@ React 19 · Vite · Express 5 · MongoDB · JWT · Google Maps · Multer
 
 ---
 
-## Project structure
-
-```
-├── backend/           # Express API
-├── frontend/          # React portal
-├── database/data/     # Demo JSON (users, properties, violations)
-├── docs/              # Guides + screenshots
-└── .github/workflows/ # CI on every push
-```
-
----
-
 ## Deploy & CI
 
-- **CI:** GitHub Actions runs import + API tests + frontend build on every push to `main`.
-- **Deploy:** Step-by-step [docs/DEPLOY.md](docs/DEPLOY.md) for Vercel (frontend) + Render (API) + Atlas (DB).
+- **CI:** GitHub Actions runs a MongoDB service container, `db:import`, API tests, and a frontend production build on every push to `main`.
+- **Deploy:** step-by-step guide in [docs/DEPLOY.md](docs/DEPLOY.md) — Vercel (frontend) + Render (API) + Atlas (database), all on free tiers.
 
 ---
 
-## GitHub tips (more visibility)
+## Contributing
 
-1. Pin this repo on your profile.  
-2. Add topics: `react`, `nodejs`, `mongodb`, `express`, `fullstack`, `google-maps`, `portfolio`.  
-3. Set repo **About** description: _Municipal violation management — React, Express, MongoDB_.  
-4. Add your live demo URL to the **Live demo** section above after deploy.
+Issues and PRs are welcome. If you spot a bug or want to propose a feature, open an issue first so we can discuss the approach before you put in the work.
+
+---
+
+## Author
+
+Built by **Ajinkya Yadav** — AI & ML Engineering student, Software Engineer Intern at MetaGrad Labs.
+
+[![GitHub](https://img.shields.io/badge/-Ajinkya1835-000000?style=flat-square&logo=github&logoColor=white)](https://github.com/Ajinkya1835)
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-000000?style=flat-square&logo=linkedin&logoColor=0A66C2)](https://www.linkedin.com/in/ajinkya-yadav-70b3671a6)
+
+If this project was useful or interesting, a ⭐ on the repo and a follow help a lot.
 
 ---
 
