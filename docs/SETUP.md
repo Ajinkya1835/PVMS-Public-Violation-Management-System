@@ -14,8 +14,8 @@
 ## Clone and install
 
 ```bash
-git clone https://github.com/Ajinkya1835/omlette.git
-cd omlette
+git clone https://github.com/Ajinkya1835/PVMS-Public-Violation-Management-System.git
+cd PVMS-Public-Violation-Management-System
 npm run install:all
 ```
 
